@@ -1,12 +1,14 @@
 import { useStore } from './store';
-
+console.log("ENV TEST:", import.meta.env);
 export const SubmitButton = () => {
     const nodes = useStore((state) => state.nodes);
     const edges = useStore((state) => state.edges);
 
     const handleSubmit = async () => {
         try {
-            const backendUrl = import.meta.env.VITE_BACKEND_URL;
+            console.log("BUTTON CLICKED");
+            const backendUrl = process.env.REACT_APP_BACKEND_URL;
+            console.log("backendUrl : ", backendUrl)
             const response = await fetch(`${backendUrl}/pipelines/parse`, {
                 method: 'POST',
                 headers: {
@@ -27,7 +29,7 @@ export const SubmitButton = () => {
                 `Is DAG: ${result.is_dag ? 'Yes' : 'No'}`
             );
         } catch (error) {
-            alert('Could not submit pipeline. Make sure the backend is running on port 8000.');
+            // alert('Could not submit pipeline. Make sure the backend is running on port.');
         }
     };
 
