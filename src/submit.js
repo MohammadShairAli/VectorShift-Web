@@ -6,7 +6,8 @@ export const SubmitButton = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await fetch('http://localhost:8000/pipelines/parse', {
+            const backendUrl = import.meta.env.VITE_BACKEND_URL;
+            const response = await fetch(`${backendUrl}/pipelines/parse`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
