@@ -1,0 +1,224 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply m-0 text-slate-950 antialiased;
+    background: #fffdf7;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply relative min-h-screen overflow-hidden;
+    background: #fffdf7;
+  }
+
+  .top-nav {
+    @apply fixed left-0 right-0 top-0 z-30 flex h-14 items-center justify-between border-b border-blue-100 bg-white/95 px-5 shadow-sm shadow-blue-950/5;
+  }
+
+  .top-nav__brand {
+    @apply flex items-center gap-2 text-sm font-bold tracking-wide;
+  }
+
+  .top-nav__brand-icon {
+    @apply h-7 w-7 rounded-md border border-slate-200 shadow-sm;
+  }
+
+  .top-nav__brand-text {
+    @apply flex items-baseline;
+  }
+
+  .top-nav__brand-vector {
+    @apply text-black;
+  }
+
+  .top-nav__brand-shift {
+    color: #5B4824;
+  }
+
+  .pipeline-toolbar {
+    @apply pointer-events-none fixed bottom-0 left-0 top-14 z-20;
+  }
+
+  .pipeline-toolbar__toggle {
+    @apply pointer-events-auto fixed left-0 top-20 inline-flex h-10 items-center gap-1.5 rounded-r-lg border border-l-0 px-3 text-xs font-semibold text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-300;
+    background: #172554;
+    border-color: #172554;
+  }
+
+  .pipeline-toolbar__toggle-icon {
+    @apply transition-transform duration-300;
+  }
+
+  .pipeline-toolbar__panel {
+    @apply pointer-events-auto fixed bottom-0 left-0 top-14 w-72 border-r border-blue-100 bg-white/95 px-4 py-5 shadow-xl transition duration-300;
+    transform: translateX(-100%);
+  }
+
+  .pipeline-toolbar--open .pipeline-toolbar__panel {
+    transform: translateX(0);
+  }
+
+  .pipeline-toolbar--open .pipeline-toolbar__toggle {
+    background: #172554;
+    left: 18rem;
+  }
+
+  .pipeline-toolbar--open .pipeline-toolbar__toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .pipeline-toolbar__header {
+    @apply mb-4 flex flex-col gap-1 rounded-md border border-blue-900 bg-blue-950 px-3 py-2.5;
+  }
+
+  .pipeline-toolbar__eyebrow {
+    @apply text-xs font-semibold uppercase tracking-wide text-blue-100;
+  }
+
+  .pipeline-toolbar__title {
+    @apply m-0 text-base font-semibold text-white;
+  }
+
+  .pipeline-toolbar__nodes {
+    @apply grid grid-cols-2 gap-2;
+  }
+
+  .draggable-node {
+    @apply flex h-12 w-full cursor-grab select-none items-center justify-between rounded-md border border-blue-100 bg-white px-2 text-xs font-semibold text-slate-800 shadow-sm transition duration-150 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-950 hover:shadow-md active:cursor-grabbing active:scale-[0.98];
+  }
+
+  .draggable-node::after {
+    @apply ml-2 text-slate-300;
+    content: '::::';
+    letter-spacing: -2px;
+    writing-mode: vertical-rl;
+  }
+
+  .draggable-node__content {
+    @apply flex min-w-0 items-center gap-1.5;
+  }
+
+  .draggable-node__label {
+    @apply truncate;
+  }
+
+  .node-icon {
+    @apply flex h-5 w-5 shrink-0 items-center justify-center rounded border border-blue-200 bg-blue-950 text-[10px] font-bold text-white;
+  }
+
+  .node-icon--small {
+    @apply h-5 w-5 text-[9px];
+  }
+
+  .pipeline-canvas {
+    @apply h-[calc(100vh-3.5rem)] w-full overflow-hidden border-y border-slate-200;
+    margin-top: 3.5rem;
+    background: #fffdf7;
+  }
+
+  .pipeline-node {
+    @apply relative rounded-lg border border-blue-100 bg-white text-xs text-slate-950 shadow-md shadow-blue-950/10 transition-shadow duration-150;
+    width: 200px;
+    overflow: visible;
+  }
+
+  .pipeline-node__header {
+    @apply rounded-t-lg border-b border-blue-900 bg-blue-950 px-2.5 py-2.5;
+  }
+
+  .pipeline-node__title-row {
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .pipeline-node__title-group {
+    @apply flex min-w-0 items-center gap-2;
+  }
+
+  .pipeline-node__title {
+    @apply block truncate text-xs font-bold text-white;
+  }
+
+  .pipeline-node__delete {
+    @apply flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-blue-200 bg-white/95 text-blue-950 transition hover:border-rose-200 hover:bg-rose-50 hover:text-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-200;
+  }
+
+  .pipeline-node__description {
+    @apply mt-1 block text-[10px] leading-tight text-blue-100/90;
+  }
+
+  .pipeline-node__content {
+    @apply grid gap-2 rounded-b-lg bg-white p-3;
+  }
+
+  .pipeline-node__variable-label {
+    @apply pointer-events-none absolute rounded bg-white/90 px-1 text-[9px] font-semibold text-blue-900;
+    left: 8px;
+    transform: translateY(-50%);
+  }
+
+  .pipeline-node__body {
+    @apply leading-snug text-slate-600;
+  }
+
+  .node-field {
+    @apply grid gap-1.5;
+  }
+
+  .node-field__label {
+    @apply text-[10px] font-bold uppercase tracking-wide text-slate-500;
+  }
+
+  .node-field-control {
+    @apply w-full box-border rounded-md border border-slate-200 bg-slate-50 px-2 py-1.5 text-xs text-slate-950 outline-none transition focus:border-blue-700 focus:bg-white focus:ring-2 focus:ring-blue-100;
+  }
+
+  .react-flow__node.selected .pipeline-node {
+    @apply border-blue-700 shadow-lg shadow-blue-950/20;
+  }
+
+  .react-flow__handle {
+    @apply h-2.5 w-2.5 border-2 border-white bg-blue-950 shadow-sm;
+  }
+
+  .react-flow__handle-left {
+    left: -5px;
+  }
+
+  .react-flow__handle-right {
+    right: -5px;
+  }
+
+  .react-flow__edge {
+    @apply cursor-pointer;
+  }
+
+  .react-flow__edge-path {
+    stroke: #172554;
+    stroke-width: 2;
+  }
+
+  .react-flow__edge:hover .react-flow__edge-path {
+    stroke: #e11d48;
+    stroke-width: 3;
+  }
+
+  .submit-bar {
+    @apply flex items-center justify-center;
+  }
+
+  .submit-button {
+    @apply inline-flex items-center justify-center rounded-md border border-blue-900 bg-blue-950 px-3.5 py-1.5 text-xs font-semibold text-white shadow-md shadow-blue-950/20 transition hover:-translate-y-0.5 hover:bg-blue-900 hover:shadow-lg hover:shadow-blue-950/20 focus:outline-none focus:ring-2 focus:ring-blue-300 active:translate-y-0 active:shadow-sm;
+  }
+}
